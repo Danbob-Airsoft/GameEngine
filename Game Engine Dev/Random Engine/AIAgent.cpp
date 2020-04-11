@@ -55,5 +55,4 @@ void AIAgent::TakeDamage()
 void AIAgent::Think()
 {
 	//Decide which to do
-
 }

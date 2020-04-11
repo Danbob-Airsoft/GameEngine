@@ -3,7 +3,7 @@
 
 sf::RenderWindow* Renderer::CreateWindow(BackgroundTile* Background, ResourceManager* EngineResource)
 {
-	sf::RenderWindow* NewWindow = new sf::RenderWindow(sf::VideoMode(1904, 1014), "The Random Engine");
+	sf::RenderWindow* NewWindow = new sf::RenderWindow(sf::VideoMode(1900, 1000), "The Random Engine");
 	Background->CreateBackgroundVector(NewWindow, EngineResource);
 	return NewWindow;
 }

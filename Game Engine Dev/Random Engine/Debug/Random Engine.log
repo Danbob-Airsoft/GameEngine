@@ -1,15 +1,5 @@
 ﻿  Player.cpp
-C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(6,75): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(6,50): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(8,124): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(9,124): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -18,7 +8,7 @@ C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(8,124): warning 
           [
               T=float
           ]
-C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(8,80): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(9,80): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -27,13 +17,13 @@ C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(8,80): warning C
           [
               T=float
           ]
-C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(53,35): warning C4018: '<': signed/unsigned mismatch
-C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(152,20): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(56,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(158,20): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(153,17): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\danie\Desktop\Game Engine Dev\Random Engine\Player.cpp(159,17): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float

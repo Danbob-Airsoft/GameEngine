@@ -3,7 +3,8 @@
 
 Player::Player(ResourceManager* EngineResources, sf::RenderWindow* Window, sf::Time CurrentTime)
 {
-    PlayerSprite.setPosition(Window->getSize().x / 2, Window->getSize().y / 2);
+    setPosition(200.0f, 200.0f);
+    PlayerSprite.setPosition(200.0f,200.0f);
     PlayerSprite.setTexture(EngineResources->PlayerTexture);
     PlayerSprite.setOrigin(sf::Vector2f(PlayerSprite.getTexture()->getSize().x / 2, PlayerSprite.getTexture()->getSize().y / 2));
     PlayerSprite.setScale(sf::Vector2f(1.0f, 1.0f));
@@ -23,6 +24,7 @@ Player::Player(ResourceManager* EngineResources, sf::RenderWindow* Window, sf::T
 
 void Player::Update(sf::Keyboard::Key Key, sf::RenderWindow* Window, std::vector<Obstacle*> WorldObstacles)
 {
+    PlayerSprite.setPosition(getPosition());
     //Check if paused
     if (GamePaused == false) 
     {
@@ -35,17 +37,18 @@ void Player::Update(sf::Keyboard::Key Key, sf::RenderWindow* Window, std::vector
             //------------------------------- Movement --------------------------------
         case sf::Keyboard::W:
             //Store current position
-            CurrentPosition = PlayerSprite.getPosition();
+            CurrentPosition = getPosition();
             //Move Forward
-            PlayerSprite.setPosition(PlayerSprite.getPosition() - (MoveSpeed * FindForwardVector()));
+            setPosition(getPosition() - (MoveSpeed * FindForwardVector()));
             PlaySound(MoveSound);
 
             //Check if outside barrier
-            if (PlayerSprite.getPosition().x < (0 + PlayerSprite.getTexture()->getSize().x / 2) || PlayerSprite.getPosition().y < + (PlayerSprite.getTexture()->getSize().y / 2 )||
-                PlayerSprite.getPosition().x > (Window->getSize().x - PlayerSprite.getTexture()->getSize().x / 2) 
-                || PlayerSprite.getPosition().y > (Window->getSize().y - PlayerSprite.getTexture()->getSize().y / 2))
+            if (getPosition().x < (0 + PlayerSprite.getTexture()->getSize().x / 4) 
+                || getPosition().y < (0 + PlayerSprite.getTexture()->getSize().y / 4) 
+                || getPosition().x > (Window->getSize().x / 2) - (PlayerSprite.getTexture()->getSize().x / 3)
+                || getPosition().y > (Window->getSize().y / 2) - (PlayerSprite.getTexture()->getSize().y / 3))
             {
-                PlayerSprite.setPosition(CurrentPosition);
+                setPosition(CurrentPosition);
             }
             //Otherwise check position against world obstacles
             else 
@@ -55,7 +58,7 @@ void Player::Update(sf::Keyboard::Key Key, sf::RenderWindow* Window, std::vector
                     Obstacle* CurrentObstacle = WorldObstacles[i];
                     if (CurrentObstacle->ObstacleSprite.getGlobalBounds().intersects(PlayerSprite.getGlobalBounds())) 
                     {
-                        std::cout << i << std::endl;
+                        setPosition(CurrentPosition);
                     }
                 }
             }
@@ -69,15 +72,16 @@ void Player::Update(sf::Keyboard::Key Key, sf::RenderWindow* Window, std::vector
 
         case sf::Keyboard::S:
             //Store current position
-            CurrentPosition = PlayerSprite.getPosition();
+            CurrentPosition = getPosition();
             //Move Backwards
-            PlayerSprite.setPosition(PlayerSprite.getPosition() + (MoveSpeed * FindForwardVector()));
+            setPosition(PlayerSprite.getPosition() + (MoveSpeed * FindForwardVector()));
             PlaySound(MoveSound);
             //Check if outside barrier
-            if (PlayerSprite.getPosition().x < 0 || PlayerSprite.getPosition().y < 0 ||
-                PlayerSprite.getPosition().x > Window->getSize().x || PlayerSprite.getPosition().y > Window->getSize().y)
+            if (getPosition().x < (0 + PlayerSprite.getTexture()->getSize().x / 2) || getPosition().y < (0 + PlayerSprite.getTexture()->getSize().y / 2) ||
+                getPosition().x >(Window->getSize().x - PlayerSprite.getTexture()->getSize().x / 2)
+                || getPosition().y >(Window->getSize().y - PlayerSprite.getTexture()->getSize().y / 2))
             {
-                PlayerSprite.setPosition(CurrentPosition);
+                setPosition(CurrentPosition);
             }
             break;
 
@@ -94,8 +98,10 @@ void Player::Update(sf::Keyboard::Key Key, sf::RenderWindow* Window, std::vector
             PlayerSprite.setPosition(PlayerSprite.getPosition() - (MoveSpeed * FindForwardVector()));
             PlaySound(MoveSound);
             //Check if outside barrier
-            if (PlayerSprite.getPosition().x < 0 || PlayerSprite.getPosition().y < 0 ||
-                PlayerSprite.getPosition().x > Window->getSize().x || PlayerSprite.getPosition().y > Window->getSize().y)
+            if (getPosition().x < (0 + PlayerSprite.getTexture()->getSize().x / 4)
+                || getPosition().y < (0 + PlayerSprite.getTexture()->getSize().y / 4)
+                || getPosition().x >(Window->getSize().x / 2) - (PlayerSprite.getTexture()->getSize().x / 3)
+                || getPosition().y >(Window->getSize().y / 2) - (PlayerSprite.getTexture()->getSize().y / 3))
             {
                 PlayerSprite.setPosition(CurrentPosition);
             }
@@ -159,7 +165,7 @@ void Player::Shoot(sf::Time CurrentTime, std::vector<Projectile*> &Projectiles, 
 {
     if (CurrentTime >= TimetoNextShot) 
     {
-        sf::Vector2f CannonLocation = (PlayerSprite.getPosition() + FindForwardVector()) * 0.5f;
+        sf::Vector2f CannonLocation = (getPosition() + FindForwardVector());
 
         Projectile* NewProjectile = new Projectile(EngineResource, CannonLocation);
         //Set Projectile forward vector
